@@ -1,6 +1,54 @@
 <?php
 //reids锁
 
+/*
+以下设置测试通过
+
+php-fpm设置
+pm = static
+pm.max_children = 900
+pm.start_servers = 150
+pm.min_spare_servers = 150
+pm.max_spare_servers = 900
+pm.max_requests = 30240
+
+nginx设置
+worker_processes 8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+pid /run/nginx.pid;
+
+worker_rlimit_nofile 102400;
+events {
+        use epoll;
+        worker_connections 102400;
+        multi_accept on;
+
+}
+
+		fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 16 16k;
+        fastcgi_busy_buffers_size 16k;
+        fastcgi_temp_file_write_size 16k;
+        fastcgi_cache_valid 200 302 1h;
+        fastcgi_cache_valid 301 1d;
+        fastcgi_cache_valid any 1m;
+        fastcgi_cache_min_uses 1;
+        fastcgi_cache_use_stale error timeout invalid_header http_500;
+
+        server_names_hash_bucket_size 128;
+        client_header_buffer_size 4k;
+        large_client_header_buffers 4 4k;
+        client_max_body_size 8m;
+
+        open_file_cache max=204800 inactive=20s;
+        open_file_cache_min_uses 1;
+        open_file_cache_valid 30s;
+        
+*/
+
 set_time_limit(6000);
 
 function rand_str($type, $length) {
