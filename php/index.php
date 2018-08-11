@@ -1,6 +1,8 @@
 <?php
 //reids锁
 
+set_time_limit(6000);
+
 function rand_str($type, $length) {
 	$str1 = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z";
 	$str2 = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
@@ -66,16 +68,10 @@ while(!$set_ok) {
 		$stmt = $dbh->query('select * from product where id = ' . $id);
 		$rows = $stmt->fetchAll();
 
-		//模拟网络延时
-		sleep(rand(1, 3));
-
 		$num = intval($rows[0]["num"]);
 		if($num > 0) {
 			$stmt = $dbh->prepare("update product set num = num - 1 where id = " . $id);
 			$stmt->execute();
-	
-			//模拟网络延时
-			sleep(rand(1, 3));
 		
 			$res["code"] = 0;
 			$res["msg"] = "剩余" . ($num - 1) . "个商品";

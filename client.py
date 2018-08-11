@@ -6,9 +6,10 @@ import grequests
 if __name__ == "__main__":
 	
 	#运行请求数
-	num = 3000
+	num = 10000
 	
 	#访问的url
+	#url = "http://127.0.0.1/php/index_unsafe.php"
 	url = "http://127.0.0.1/php/index.php"
 	
 	urls = []

@@ -9,16 +9,10 @@ $id = 1;
 $stmt = $dbh->query('select * from product where id = ' . $id);
 $rows = $stmt->fetchAll();
 
-//模拟网络延时
-sleep(rand(1, 3));
-
 $num = intval($rows[0]["num"]);
 if($num > 0) {
 	$stmt = $dbh->prepare("update product set num = num - 1 where id = " . $id);
 	$stmt->execute();
-	
-	//模拟网络延时
-	sleep(rand(1, 3));
 	
 	echo json_encode(array(
 		"code" => 0,
